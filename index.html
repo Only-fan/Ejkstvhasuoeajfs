@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="robots" content="noindex, nofollow">
   <title>Adult Content Verification</title>
+  <meta name="robots" content="noindex, nofollow" />
   <style>
     body {
       margin: 0;
@@ -18,6 +18,7 @@
       color: white;
       overflow: hidden;
     }
+
     .container {
       text-align: center;
       max-width: 800px;
@@ -25,6 +26,7 @@
       position: relative;
       z-index: 2;
     }
+
     h1 {
       font-size: 3.5rem;
       margin-bottom: 2rem;
@@ -32,17 +34,20 @@
       letter-spacing: 2px;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     }
+
     .disclaimer {
       font-size: 1rem;
       margin-bottom: 3rem;
       opacity: 0.8;
     }
+
     .options {
       display: flex;
       justify-content: center;
       gap: 30px;
       margin-top: 40px;
     }
+
     .option-btn {
       width: 180px;
       height: 180px;
@@ -56,24 +61,31 @@
       transition: all 0.3s ease;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
     }
+
     .no-btn {
       background: white;
       color: black;
       border: 3px solid #ccc;
     }
+
     .yes-btn {
       background: black;
       color: white;
       border: 3px solid #ff0000;
     }
+
     .option-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
     }
+
     .option-btn:active {
       transform: scale(0.98);
     }
+
     .bg-pattern {
       position: absolute;
       top: 0;
@@ -89,6 +101,7 @@
       );
       z-index: 1;
     }
+
     .pulse {
       position: absolute;
       width: 100%;
@@ -97,6 +110,7 @@
       animation: pulse 3s infinite;
       z-index: 0;
     }
+
     @keyframes pulse {
       0% { transform: scale(0.9); opacity: 0.5; }
       50% { transform: scale(1.1); opacity: 0.2; }
@@ -115,26 +129,15 @@
       <br>By entering, you confirm you are of legal age.
     </p>
     <div class="options">
-      <div class="option-btn no-btn" onclick="redirectUser()">No</div>
-      <div class="option-btn yes-btn" onclick="redirectUser()">Yes</div>
+      <div class="option-btn no-btn" onclick="redirectToOffer()">No</div>
+      <div class="option-btn yes-btn" onclick="redirectToOffer()">Yes</div>
     </div>
   </div>
 
   <script>
-    function getClickId() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('clickid') || '';
-    }
-
-    function redirectUser() {
-      const clickid = getClickId();
-      const redirectUrl = "https://supersedeasserted.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c&subid=" + clickid;
-
-      // Optional: Add 0.5s delay to bypass some bot detection
-      setTimeout(() => {
-        window.location.href = redirectUrl;
-      }, 500);
+    function redirectToOffer() {
+      window.location.href = "https://oek5g.bemobtrcks.com/go/c727da6f-9351-4d32-bac1-7d6a1af0422d?bid=[BID]&impressionid=[IMPRESSIONID]&websiteid=[WEBSITEID]&quality=[QUALITY]&categoryid=[CATEGORYID]&country=[COUNTRY]&formfactorname=[FORMFACTORNAME]&campaignid=[CAMPAIGNID]&campaignname=[CAMPAIGNNAME]&screenresolution=[SCREENRESOLUTION]&categoryname=[CATEGORYNAME]";
     }
   </script>
 </body>
-    </html>
+                                                                     </html>
