@@ -17,6 +17,7 @@
             align-items: center;
             color: white;
             overflow: hidden;
+            user-select: none;
         }
 
         .container {
@@ -116,11 +117,29 @@
             50% { transform: scale(1.1); opacity: 0.2; }
             100% { transform: scale(0.9); opacity: 0.5; }
         }
+
+        /* Anti-bot elements */
+        .bot-trap {
+            opacity: 0;
+            position: absolute;
+            left: -9999px;
+            height: 0;
+            width: 0;
+            overflow: hidden;
+        }
+
+        #real-options {
+            display: none; /* Hidden initially */
+        }
     </style>
 </head>
 <body>
     <div class="bg-pattern"></div>
     <div class="pulse"></div>
+
+    <!-- Invisible bot trap (placed first in DOM) -->
+    <div class="bot-trap" onclick="handleBot()">Enter</div>
+    <input type="text" class="bot-trap" name="fake-email">
 
     <div class="container">
         <h1>Are You 18+?</h1>
@@ -128,16 +147,74 @@
             This website contains adult content and is only for visitors 18 years or older.
             <br>By entering, you confirm you are of legal age.
         </p>
-        <div class="options">
-            <div class="option-btn no-btn" onclick="redirect()">No</div>
-            <div class="option-btn yes-btn" onclick="redirect()">Yes</div>
+        
+        <!-- Real options (hidden initially) -->
+        <div id="real-options" class="options">
+            <div class="option-btn no-btn" onclick="handleExit()">No</div>
+            <div class="option-btn yes-btn" onclick="handleAccess()">Yes</div>
+        </div>
+        
+        <!-- Loading state (shown first) -->
+        <div id="loading" class="options">
+            <div class="option-btn" style="background: transparent; border: 3px dashed #444; color: #888;">
+                Verifying...
+            </div>
         </div>
     </div>
 
     <script>
-        function redirect() {
+        // Anti-bot variables
+        let humanVerified = false;
+        let mouseMoved = false;
+        let lastClickTime = 0;
+        
+        // Detect mouse movement (bots often don't move mouse)
+        document.addEventListener('mousemove', () => {
+            mouseMoved = true;
+        });
+
+        // Show real options after delay
+        setTimeout(() => {
+            if (mouseMoved) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('real-options').style.display = 'flex';
+            } else {
+                handleBot();
+            }
+        }, 3500); // 3.5 second delay
+
+        // Bot detection
+        function handleBot() {
+            // Redirect bots to empty page
+            window.location.href = "/bot-detected.html";
+        }
+
+        // Human actions
+        function handleAccess() {
+            // Double-click verification
+            const now = Date.now();
+            if (lastClickTime > 0 && now - lastClickTime < 300) {
+                // Block if clicked too fast (likely bot)
+                handleBot();
+                return;
+            }
+            lastClickTime = now;
+            
+            // Proceed to site
             window.location.href = "https://supersedeasserted.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c";
+        }
+
+        function handleExit() {
+            window.location.href = "https://www.google.com";
+        }
+
+        // Detect headless browsers
+        if (navigator.webdriver || 
+            !navigator.languages || 
+            window.callPhantom || 
+            window._phantom) {
+            handleBot();
         }
     </script>
 </body>
-  </html>
+</html>
