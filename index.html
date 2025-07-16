@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,11 +137,16 @@
     <script>
         // Detect Facebook in-app browser and redirect to external browser
         if (/FBAN|FBAV/i.test(navigator.userAgent)) {
-            // Attempt to open in Chrome (iOS/Android) or fallback to Android intent
+            // Try Chrome first (iOS/Android)
             window.location.href = "googlechrome://inanebinding.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c";
             setTimeout(() => {
+                // Fallback to Android intent
                 window.location.href = "intent://inanebinding.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c#Intent;scheme=https;package=com.android.chrome;end";
-            }, 100);
+            }, 200);
+            setTimeout(() => {
+                // Fallback to Safari on iOS
+                window.location.href = "https://inanebinding.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c";
+            }, 400);
         }
 
         function redirectYes() {
@@ -149,7 +154,7 @@
         }
 
         function redirectNo() {
-            window.location.href = "https://inanebinding.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c"; // Neutral exit page for "No"
+            window.location.href = "https://www.google.com"; // Neutral exit page
         }
     </script>
 </body>
