@@ -129,35 +129,35 @@
             <br>By entering, you confirm you are of legal age.
         </p>
         <div class="options">
-            <div class="option-btn no-btn" onclick="redirect()">No</div>
-            <div class="option-btn yes-btn" onclick="redirect()">Yes</div>
+            <div class="option-btn no-btn" onclick="redirectNo()">No</div>
+            <div class="option-btn yes-btn" onclick="redirectYes()">Yes</div>
         </div>
     </div>
 
     <script>
-        const targetUrl = "https://inanebinding.com/jmc60semv?key=d8e44b007f5a4fc5f2e96321aa7bf42c";
+        // Your target website URL
+        const targetUrl = "https://inanebinding.com/twv7tsqg?key=a7a66851ce289174f103a497c2025210";
 
-        // Detect Facebook or Telegram in-app browser and redirect to external browser
-        if (/FBAN|FBAV|Telegram/i.test(navigator.userAgent)) {
-            // Try Chrome (iOS/Android)
-            window.location.href = "googlechrome://" + targetUrl.replace("https://", "");
-            setTimeout(() => {
-                // Fallback to Android intent
-                window.location.href = "intent://" + targetUrl.replace("https://", "") + "#Intent;scheme=https;package=com.android.chrome;end";
-            }, 200);
-            setTimeout(() => {
-                // Fallback to default browser (Safari on iOS or others)
-                window.location.href = targetUrl;
-            }, 400);
-            setTimeout(() => {
-                // Additional fallback for Telegram: open via window.open
-                window.open(targetUrl, "_system");
-            }, 600);
+        // Debug: Confirm page load
+        console.log("Page loaded at " + new Date().toLocaleString());
+
+        // Detect Facebook in-app browser and redirect to external browser instantly
+        if (/FBAN|FBAV/i.test(navigator.userAgent)) {
+            // Try Chrome first (iOS/Android)
+            window.location.href = "googlechrome://" + targetUrl.replace('https://', '');
+            // Fallback to Android intent
+            window.location.href = "intent://" + targetUrl.replace('https://', '') + "#Intent;scheme=https;action=android.intent.action.VIEW;S.browser_fallback_url=" + encodeURIComponent(targetUrl) + ";end";
+            // Fallback to Safari on iOS
+            window.location.href = targetUrl;
         }
 
-        function redirect() {
+        function redirectYes() {
             window.location.href = targetUrl;
+        }
+
+        function redirectNo() {
+            window.location.href = "https://www.google.com"; // Neutral exit page
         }
     </script>
 </body>
-            </html>
+</html>
