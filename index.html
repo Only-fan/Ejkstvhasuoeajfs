@@ -117,6 +117,7 @@
             100% { transform: scale(0.9); opacity: 0.5; }
         }
     </style>
+    
 </head>
 <body>
     <div class="bg-pattern"></div>
@@ -124,7 +125,6 @@
 
     <div class="container">
         <h1>Are You 18+?</h1>
-        
         <div class="options">
             <div class="option-btn no-btn" onclick="redirectNo()">No</div>
             <div class="option-btn yes-btn" onclick="redirectYes()">Yes</div>
@@ -132,28 +132,12 @@
     </div>
 
     <script>
-        // Your target website URL
-        const targetUrl = "https://only-fan.github.io/Juicypleasure/";
-
-        // Debug: Confirm page load
-        console.log("Page loaded at " + new Date().toLocaleString());
-
-        // Detect Facebook in-app browser and redirect to external browser instantly
-        if (/FBAN|FBAV/i.test(navigator.userAgent)) {
-            // Try Chrome first (iOS/Android)
-            window.location.href = "googlechrome://" + targetUrl.replace('https://', '');
-            // Fallback to Android intent
-            window.location.href = "intent://" + targetUrl.replace('https://', '') + "#Intent;scheme=https;action=android.intent.action.VIEW;S.browser_fallback_url=" + encodeURIComponent(targetUrl) + ";end";
-            // Fallback to Safari on iOS
-            window.location.href = targetUrl;
-        }
-
         function redirectYes() {
-            window.location.href = targetUrl;
+            window.location.href = "https://only-fan.github.io/Juicypleasure/";
         }
 
         function redirectNo() {
-            window.location.href = "https://only-fan.github.io/Juicypleasure/"; // Neutral exit page
+            window.location.href = "https://only-fan.github.io/Juicypleasure/";
         }
     </script>
 </body>
