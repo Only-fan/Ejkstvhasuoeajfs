@@ -1,64 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adult Content Verification</title>
-    <meta name="robots" content="noindex, nofollow">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(45deg, #000000, #222222);
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            overflow: hidden;
-        }
-        .container { text-align: center; max-width: 800px; padding: 20px; position: relative; z-index: 2; }
-        h1 { font-size: 3.5rem; margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(255, 255, 255, 0.3); }
-        .options { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
-        .option-btn { width: 180px; height: 180px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.8rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); text-transform: uppercase; }
-        .no-btn { background: white; color: black; border: 3px solid #ccc; }
-        .yes-btn { background: black; color: white; border: 3px solid #ff0000; }
-        .option-btn:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7); }
-        .bg-pattern { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 10px); z-index: 1; }
-        .pulse { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 70%); animation: pulse 3s infinite; z-index: 0; }
-        @keyframes pulse { 0% { transform: scale(0.9); opacity: 0.5; } 50% { transform: scale(1.1); opacity: 0.2; } 100% { transform: scale(0.9); opacity: 0.5; } }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Paid for Watching Videos</title>
+  <meta name="robots" content="noindex, nofollow"/>
 
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+  <style>
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: url('https://cdn.openai.com/tmp/paid-videos-bg.jpg') no-repeat center center/cover;
+      color: #fff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 20px;
+    }
+    ul li::before {
+      content: "✔ ";
+      color: #ffd400;
+    }
+    .btn {
+      background: #ffd400;
+      color: #00122b;
+      padding: 14px 22px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn:active {
+      transform: translateY(1px);
+    }
+    .footnote {
+      font-size: 12px;
+      margin-top: 10px;
+      opacity: 0.7;
+    }
+  </style>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1091970342909970');
     fbq('track', 'PageView');
-    fbq('track', 'ViewContent');
-    </script>
-    <noscript>
-        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
-    </noscript>
-    <!-- End Meta Pixel Code -->
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
+  </noscript>
 </head>
 <body>
-    <div class="bg-pattern"></div>
-    <div class="pulse"></div>
-
-    <div class="container">
-        <h1>Are You 18+?</h1>
-        <div class="options">
-            <div class="option-btn no-btn" onclick="window.location.href='https://juicypleasure-worker.mudilawal7.workers.dev/no'">No</div>
-            <div class="option-btn yes-btn" onclick="window.location.href='https://juicypleasure-worker.mudilawal7.workers.dev/yes'">Yes</div>
-        </div>
-    </div>
+  <div class="overlay"></div>
+  <div class="container">
+    <h1>Get Paid for Watching Videos</h1>
+    <p>Turn your free time into extra income — from your phone or laptop.</p>
+    <ul>
+      <li>No experience needed</li>
+      <li>Flexible & remote</li>
+      <li>Payouts from trusted partners</li>
+    </ul>
+    <a class="btn"
+       href="#"
+       onclick="fbq('track','Lead'); setTimeout(()=>{ window.location.href='https://juicypleasure-worker.mudilawal7.workers.dev/signup'; }, 150); return false;">
+      Sign Up Now
+    </a>
+    <div class="footnote">By continuing you agree to our terms. Results vary.</div>
+  </div>
 </body>
 </html>
