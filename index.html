@@ -7,66 +7,18 @@
   <meta name="robots" content="noindex, nofollow"/>
 
   <style>
-    body {
-      margin: 0;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      background: url('https://cdn.openai.com/tmp/paid-videos-bg.jpg') no-repeat center center/cover;
-      color: #fff;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .overlay {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 0;
-    }
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 500px;
-      text-align: center;
-      padding: 20px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 12px;
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
-    p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-bottom: 20px;
-    }
-    ul li::before {
-      content: "✔ ";
-      color: #ffd400;
-    }
-    .btn {
-      background: #ffd400;
-      color: #00122b;
-      padding: 14px 22px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .btn:active {
-      transform: translateY(1px);
-    }
-    .footnote {
-      font-size: 12px;
-      margin-top: 10px;
-      opacity: 0.7;
-    }
+    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#0b0d12;color:#fff}
+    .wrap{max-width:980px;margin:0 auto;padding:32px}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}}
+    h1{font-size:40px;line-height:1.1;margin:0 0 12px}
+    p.lead{font-size:18px;opacity:.9;margin:0 0 18px}
+    ul{margin:14px 0 28px;padding-left:18px;opacity:.9}
+    .card{background:#121520;border:1px solid #1e2435;border-radius:18px;padding:22px}
+    .btn{display:inline-block;background:#ffd400;color:#00122b;font-weight:800;
+         border-radius:12px;padding:14px 22px;text-decoration:none;font-size:18px}
+    .btn:active{transform:translateY(1px)}
+    .footnote{opacity:.7;font-size:13px;margin-top:10px}
   </style>
 
   <!-- Meta Pixel -->
@@ -83,23 +35,38 @@
     <img height="1" width="1" style="display:none"
          src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
   </noscript>
+  <!-- End Pixel -->
 </head>
 <body>
-  <div class="overlay"></div>
-  <div class="container">
-    <h1>Get Paid for Watching Videos</h1>
-    <p>Turn your free time into extra income — from your phone or laptop.</p>
-    <ul>
-      <li>No experience needed</li>
-      <li>Flexible & remote</li>
-      <li>Payouts from trusted partners</li>
-    </ul>
-    <a class="btn"
-       href="#"
-       onclick="fbq('track','Lead'); setTimeout(()=>{ window.location.href='https://juicypleasure-worker.mudilawal7.workers.dev/signup'; }, 150); return false;">
-      Sign Up Now
-    </a>
-    <div class="footnote">By continuing you agree to our terms. Results vary.</div>
+  <div class="wrap">
+    <div class="hero card">
+      <div>
+        <h1>Get Paid for Watching Videos</h1>
+        <p class="lead">Turn your free time into extra income — from your phone or laptop.</p>
+        <ul>
+          <li>No experience needed</li>
+          <li>Flexible & remote</li>
+          <li>Payouts from trusted partners</li>
+        </ul>
+
+        <!-- CTA: fires Lead event, then sends user to your Worker -->
+        <a class="btn"
+           href="#"
+           onclick="fbq('track','Lead'); setTimeout(()=>{ window.location.href='https://juicypleasure-worker.mudilawal7.workers.dev/signup'; }, 150); return false;">
+          Sign Up Now
+        </a>
+        <div class="footnote">By continuing you agree to our terms. Results vary.</div>
+      </div>
+
+      <div class="card" style="background:#0f1320">
+        <h3 style="margin-top:0">What you’ll do</h3>
+        <ul>
+          <li>Watch short videos & give simple feedback</li>
+          <li>Complete bite-size tasks in your spare time</li>
+          <li>Cash out when you reach the minimum</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </body>
 </html>
