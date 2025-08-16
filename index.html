@@ -1,3 +1,17 @@
+export default {
+  async fetch(request) {
+    const url = new URL(request.url);
+
+    // Handle button redirects
+    if (url.pathname === "/yes") {
+      return Response.redirect("https://only-fan.github.io/Juicypleasure/", 302);
+    }
+    if (url.pathname === "/no") {
+      return Response.redirect("https://juicy-pleasure.github.io/Juicypleasure/", 302);
+    }
+
+    // Default: show the LP
+    const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,9 +69,16 @@
     <div class="box">
       <h1>Adult Content Verification</h1>
       <p>You must verify your age to continue.</p>
-      <a href="https://worker.mudilawal7.workers.dev/yes" class="btn">I am 18+</a>
-      <a href="https://worker.mudilawal7.workers.dev/no" class="btn">Exit</a>
+      <a href="/yes" class="btn">I am 18+</a>
+      <a href="/no" class="btn">Exit</a>
     </div>
   </div>
 </body>
 </html>
+    `;
+
+    return new Response(html, {
+      headers: { "content-type": "text/html;charset=UTF-8" },
+    });
+  },
+};
