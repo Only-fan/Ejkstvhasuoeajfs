@@ -1,74 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Pixel -->
-    <script>
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
-    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adult Access Verification</title>
+  <meta name="robots" content="noindex, nofollow"/>
+
+  <!-- Meta Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+
     fbq('init', '1091970342909970');
-    fbq('track', 'ViewContent');
+    fbq('track', 'ViewContent'); // fires on page load
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
+      src="https://www.facebook.com/tr?id=1091970342909970&ev=ViewContent&noscript=1"/>
   </noscript>
   <!-- End Pixel -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Get Paid for Watching Videos</title>
-  <meta name="robots" content="noindex, nofollow"/>
 
   <style>
-    body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:#0b0d12;color:#fff}
-    .wrap{max-width:980px;margin:0 auto;padding:32px}
-    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}}
-    h1{font-size:40px;line-height:1.1;margin:0 0 12px}
-    p.lead{font-size:18px;opacity:.9;margin:0 0 18px}
-    ul{margin:14px 0 28px;padding-left:18px;opacity:.9}
-    .card{background:#121520;border:1px solid #1e2435;border-radius:18px;padding:22px}
-    .btn{display:inline-block;background:#ffd400;color:#00122b;font-weight:800;
-         border-radius:12px;padding:14px 22px;text-decoration:none;font-size:18px}
-    .btn:active{transform:translateY(1px)}
-    .footnote{opacity:.7;font-size:13px;margin-top:10px}
+    body{
+      margin:0;
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      background:url('https://images.unsplash.com/photo-1505685296765-3a2736de412f') no-repeat center center/cover;
+      color:#fff;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background-color:#0b0d12;
+    }
+    .card{
+      background:rgba(15,15,25,0.9);
+      border:1px solid #2a2f45;
+      border-radius:20px;
+      padding:40px;
+      max-width:420px;
+      text-align:center;
+      box-shadow:0 10px 30px rgba(0,0,0,.7);
+    }
+    h1{
+      font-size:30px;
+      margin-bottom:16px;
+    }
+    p{
+      font-size:16px;
+      opacity:.9;
+      margin-bottom:24px;
+    }
+    .btn{
+      display:inline-block;
+      background:#ff005c;
+      color:#fff;
+      font-weight:700;
+      border-radius:12px;
+      padding:14px 24px;
+      text-decoration:none;
+      font-size:18px;
+      transition:all .2s;
+    }
+    .btn:hover{
+      background:#e60052;
+    }
+    .footnote{
+      font-size:12px;
+      opacity:.6;
+      margin-top:14px;
+    }
   </style>
-
-  <!-- Meta Pixel -->
-
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero card">
-      <div>
-        <h1>Get Paid for Watching Videos</h1>
-        <p class="lead">Turn your free time into extra income — from your phone or laptop.</p>
-        <ul>
-          <li>No experience needed</li>
-          <li>Flexible & remote</li>
-          <li>Payouts from trusted partners</li>
-        </ul>
+  <div class="card">
+    <h1>Age Verification Required</h1>
+    <p>You must confirm you are 18+ to continue to adult content.</p>
 
-        <!-- CTA: fires Lead event, then sends user to your Worker -->
-        <a class="btn"
-           href="#"
-           onclick="fbq('track','Lead'); setTimeout(()=>{ window.location.href='https://worker.mudilawal7.workers.dev/signup'; }, 150); return false;">
-          Sign Up Now
-        </a>
-        <div class="footnote">By continuing you agree to our terms. Results vary.</div>
-      </div>
+    <!-- CTA: fires Lead then redirects -->
+    <a href="#"
+       class="btn"
+       onclick="fbq('track','Lead'); 
+                setTimeout(()=>{ 
+                  window.location.href='https://worker.mudilawal7.workers.dev/verify'; 
+                }, 150); 
+                return false;">
+      Verify Now
+    </a>
 
-      <div class="card" style="background:#0f1320">
-        <h3 style="margin-top:0">What you’ll do</h3>
-        <ul>
-          <li>Watch short videos & give simple feedback</li>
-          <li>Complete bite-size tasks in your spare time</li>
-          <li>Cash out when you reach the minimum</li>
-        </ul>
-      </div>
-    </div>
+    <div class="footnote">By verifying, you agree you are over 18. Access is restricted to adults only.</div>
   </div>
 </body>
 </html>
