@@ -1,99 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Adult Access Verification</title>
-  <meta name="robots" content="noindex, nofollow"/>
-
-  <!-- Meta Pixel -->
-  <script>
-    !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '1091970342909970');
-    fbq('track', 'ViewContent'); // fires on page load
-  </script>
-  <noscript>
-    <img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1091970342909970&ev=ViewContent&noscript=1"/>
-  </noscript>
-  <!-- End Pixel -->
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adult Verification</title>
   <style>
-    body{
-      margin:0;
-      font-family:Inter,Arial,Helvetica,sans-serif;
-      background:url('https://images.unsplash.com/photo-1505685296765-3a2736de412f') no-repeat center center/cover;
-      color:#fff;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background-color:#0b0d12;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: url("Background.jpg") no-repeat center center fixed;
+      background-size: cover;
     }
-    .card{
-      background:rgba(15,15,25,0.9);
-      border:1px solid #2a2f45;
-      border-radius:20px;
-      padding:40px;
-      max-width:420px;
-      text-align:center;
-      box-shadow:0 10px 30px rgba(0,0,0,.7);
+    .overlay {
+      background: rgba(0,0,0,0.7);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
     }
-    h1{
-      font-size:30px;
-      margin-bottom:16px;
+    .box {
+      background: rgba(20,20,20,0.85);
+      padding: 30px;
+      border-radius: 14px;
+      max-width: 400px;
     }
-    p{
-      font-size:16px;
-      opacity:.9;
-      margin-bottom:24px;
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
     }
-    .btn{
-      display:inline-block;
-      background:#ff005c;
-      color:#fff;
-      font-weight:700;
-      border-radius:12px;
-      padding:14px 24px;
-      text-decoration:none;
-      font-size:18px;
-      transition:all .2s;
+    p {
+      font-size: 16px;
+      margin-bottom: 20px;
     }
-    .btn:hover{
-      background:#e60052;
+    .btn {
+      display: inline-block;
+      background: #ff004f;
+      color: #fff;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 8px;
     }
-    .footnote{
-      font-size:12px;
-      opacity:.6;
-      margin-top:14px;
+    .btn:hover {
+      background: #ff2e6f;
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Age Verification Required</h1>
-    <p>You must confirm you are 18+ to continue to adult content.</p>
-
-    <!-- CTA: fires Lead then redirects -->
-    <a href="#"
-       class="btn"
-       onclick="fbq('track','Lead'); 
-                setTimeout(()=>{ 
-                  window.location.href='https://worker.mudilawal7.workers.dev/verify'; 
-                }, 150); 
-                return false;">
-      Verify Now
-    </a>
-
-    <div class="footnote">By verifying, you agree you are over 18. Access is restricted to adults only.</div>
+  <div class="overlay">
+    <div class="box">
+      <h1>Adult Content Verification</h1>
+      <p>You must verify your age to continue.</p>
+      <a href="https://worker.mudilawal7.workers.dev/yes" class="btn">I am 18+</a>
+      <a href="https://worker.mudilawal7.workers.dev/no" class="btn">Exit</a>
+    </div>
   </div>
 </body>
 </html>
