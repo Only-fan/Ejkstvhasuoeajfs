@@ -159,9 +159,8 @@
             <h1>Adult Content Verification</h1>
             <p>You must be 18 years or older to access this content. By entering, you confirm you are of legal age and agree to our Terms of Service.</p>
             <div class="buttons">
-                <!-- REPLACE YOUR_ACTUAL_WORKER_NAME with your actual worker name -->
-                <a href="https://juicypleasure-worker.mudilawal7.workers.dev?choice=yes" class="btn" id="yesBtn">I am 18+</a>
-                <a href="https://juicypleasure-worker.mudilawal7.workers.dev?choice=no" class="btn exit" id="noBtn">Exit</a>
+                <a href="#" onclick="handleVerificationClick(event, 'yes')" class="btn" id="yesBtn">I am 18+</a>
+                <a href="#" onclick="handleVerificationClick(event, 'no')" class="btn exit" id="noBtn">Exit</a>
             </div>
             <p class="warning">Warning: This content is intended for adults only and contains age-restricted material.</p>
         </div>
@@ -185,62 +184,60 @@
         fbq('track', 'PageView');
         
         // Track ViewContent with proper parameters
-        // LP views worth $0.00 until they click through
         fbq('track', 'ViewContent', {
             content_name: 'Age Verification Gate',
             content_category: 'Adult Content',
-            value: 0.00,  // LP views worth $0.00 to you
+            value: 0.00,
             currency: 'USD'
         });
+
+        // Function to handle button clicks and preserve Facebook click ID
+        function handleVerificationClick(e, choice) {
+            e.preventDefault();
+            
+            // Get Facebook click ID before we lose it
+            const fbc = getCookie('_fbc');
+            const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+            
+            // Build URL with preserved click ID parameters
+            let workerUrl = `https://juicypleasure-worker.mudilawal7.workers.dev?choice=${choice}`;
+            
+            // Add click ID parameters if available
+            if (fbc) workerUrl += `&fbc=${encodeURIComponent(fbc)}`;
+            if (fbclid) workerUrl += `&fbclid=${encodeURIComponent(fbclid)}`;
+            
+            // Track the conversion event
+            const conversionValue = 0.003;
+            fbq('track', 'Lead', {
+                content_name: 'Age Verification - ' + (choice === 'yes' ? 'Accepted' : 'Rejected'),
+                value: conversionValue,
+                currency: 'USD'
+            });
+            
+            // Track custom event
+            fbq('trackCustom', 'AgeVerification', {
+                status: choice === 'yes' ? 'accepted' : 'rejected',
+                value: conversionValue,
+                currency: 'USD'
+            });
+            
+            // Your existing redirect script will handle the browser opening
+            // It will use the workerUrl that contains preserved click IDs
+            window.location.href = workerUrl;
+        }
+
+        // Helper function to get cookies
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+            return null;
+        }
     </script>
     <noscript>
         <img height="1" width="1" style="display:none" 
             src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
     </noscript>
     <!-- End Meta Pixel Code -->
-
-    <script>
-        document.getElementById("yesBtn").addEventListener("click", function(e) {
-            e.preventDefault();
-            
-            // Your conversion value: $0.003 per conversion (from your CPM)
-            const conversionValue = 0.003;
-            
-            // Track the Lead event with Facebook Pixel
-            fbq('track', 'Lead', {
-                content_name: 'Age Verification - Accepted',
-                value: conversionValue,
-                currency: 'USD'
-            });
-            
-            // Track a custom event for the acceptance
-            fbq('trackCustom', 'AgeVerification', {
-                status: 'accepted',
-                value: conversionValue,
-                currency: 'USD'
-            });
-            
-            // Redirect after a short delay to allow the pixel to fire
-            setTimeout(function() {
-                window.location.href = e.target.href;
-            }, 300);
-        });
-
-        document.getElementById("noBtn").addEventListener("click", function(e) {
-            e.preventDefault();
-            
-            // Track a custom event for the rejection
-            fbq('trackCustom', 'AgeVerification', {
-                status: 'rejected',
-                value: 0.00,
-                currency: 'USD'
-            });
-            
-            // Redirect after a short delay to allow the pixel to fire
-            setTimeout(function() {
-                window.location.href = e.target.href;
-            }, 300);
-        });
-    </script>
 </body>
-            </html>
+</html>
