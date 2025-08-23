@@ -185,11 +185,11 @@
         fbq('track', 'PageView');
         
         // Track ViewContent with proper parameters
-        // Using average CPM value of $3.00 per 1000 impressions = $0.003 per view
+        // LP views worth $0.00 until they click through
         fbq('track', 'ViewContent', {
             content_name: 'Age Verification Gate',
             content_category: 'Adult Content',
-            value: 0.003,  // $3.00 CPM = $0.003 per view
+            value: 0.00,  // LP views worth $0.00 to you
             currency: 'USD'
         });
     </script>
@@ -203,8 +203,8 @@
         document.getElementById("yesBtn").addEventListener("click", function(e) {
             e.preventDefault();
             
-            // Your conversion value: $3.50 per conversion
-            const conversionValue = 3.50;
+            // Your conversion value: $0.003 per conversion (from your CPM)
+            const conversionValue = 0.003;
             
             // Track the Lead event with Facebook Pixel
             fbq('track', 'Lead', {
@@ -243,4 +243,4 @@
         });
     </script>
 </body>
-              </html>
+            </html>
