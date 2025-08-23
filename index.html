@@ -1,109 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adult Content Verification</title>
-  <meta name="robots" content="noindex, nofollow">
-
-  <!-- ✅ Meta Pixel Base -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '1091970342909970'); 
-
-    // ✅ Fire ViewContent when LP loads
-    fbq('track', 'ViewContent', {value:0.003, currency: 'USD'});
-  </script>
-
-  <noscript>
-    <img height="1" width="1" style="display:none"
-         src="https://www.facebook.com/tr?id=1091970342909970&ev=ViewContent&noscript=1"/>
-  </noscript>
-
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Arial', sans-serif;
-      background: url("Background.jpg") no-repeat center center fixed;
-      background-size: cover;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      overflow: hidden;
-    }
-    .overlay {
-      background: rgba(0,0,0,0.7);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .box {
-      background: rgba(20,20,20,0.85);
-      padding: 40px;
-      border-radius: 16px;
-      max-width: 420px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-    p {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-    .btn {
-      display: inline-block;
-      background: #ff004f;
-      color: #fff;
-      font-weight: bold;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin: 8px;
-      transition: background 0.3s;
-    }
-    .btn:hover { background: #ff2e6f; }
-    .btn.exit { background: #555; }
-    .btn.exit:hover { background: #777; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adult Content Verification</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .overlay {
+            background: rgba(0,0,0,0.8);
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .box {
+            background: rgba(20,20,30,0.95);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 2;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,0,79,0.2) 0%, transparent 70%);
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ff004f;
+            text-shadow: 0 0 10px rgba(255,0,79,0.5);
+        }
+        
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+        }
+        
+        .age-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ff004f;
+            text-shadow: 0 0 15px rgba(255,0,79,0.7);
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #ff004f;
+            color: #fff;
+            font-weight: bold;
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255,0,79,0.4);
+        }
+        
+        .btn:hover {
+            background: #ff2e6f;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,0,79,0.6);
+        }
+        
+        .btn.exit {
+            background: #444;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .btn.exit:hover {
+            background: #666;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+        
+        .warning {
+            font-size: 0.9rem;
+            margin-top: 30px;
+            color: #aaa;
+            font-style: italic;
+        }
+        
+        @media (max-width: 500px) {
+            .box {
+                padding: 30px 20px;
+                margin: 0 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="overlay">
-    <div class="box">
-      <h1>Adult Content Verification</h1>
-      <p>You must be 18 years or older to enter this site.</p>
-      <a href="https://juicypleasure-worker.mudilawal7.workers.dev?choice=yes"
-         class="btn" id="yesBtn">I am 18+</a>
-      <a href="https://juicypleasure-worker.mudilawal7.workers.dev?choice=no"
-         class="btn exit" id="noBtn">Exit</a>
+    <div class="overlay">
+        <div class="box">
+            <div class="age-icon">🔞</div>
+            <h1>Adult Content Verification</h1>
+            <p>You must be 18 years or older to access this content. By entering, you confirm you are of legal age and agree to our Terms of Service.</p>
+            <div class="buttons">
+                <!-- REPLACE YOUR_ACTUAL_WORKER_NAME with your actual worker name -->
+                <a href="https://juicypleasure-worker.mudilawal7.workers.dev?choice=yes" class="btn" id="yesBtn">I am 18+</a>
+                <a href="https://juicypleasure-worker.mudilawal7.workers.dev?choice=no" class="btn exit" id="noBtn">Exit</a>
+            </div>
+            <p class="warning">Warning: This content is intended for adults only and contains age-restricted material.</p>
+        </div>
     </div>
-  </div>
 
-  <!-- ✅ Track button clicks -->
-  <script>
-    document.getElementById("yesBtn").addEventListener("click", function() {
-      fbq('track', 'Lead', {value: 0.004, currency: 'USD'});
-    });
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Initialize the Pixel with your ID
+        fbq('init', '1091970342909970');
+        
+        // Track PageView for the initial load
+        fbq('track', 'PageView');
+        
+        // Track ViewContent with proper parameters
+        // Using average CPM value of $3.00 per 1000 impressions = $0.003 per view
+        fbq('track', 'ViewContent', {
+            content_name: 'Age Verification Gate',
+            content_category: 'Adult Content',
+            value: 0.003,  // $3.00 CPM = $0.003 per view
+            currency: 'USD'
+        });
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" 
+            src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- End Meta Pixel Code -->
 
-    document.getElementById("noBtn").addEventListener("click", function() {
-      fbq('trackCustom', 'Rejected');
-    });
-  </script>
+    <script>
+        document.getElementById("yesBtn").addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Your conversion value: $3.50 per conversion
+            const conversionValue = 3.50;
+            
+            // Track the Lead event with Facebook Pixel
+            fbq('track', 'Lead', {
+                content_name: 'Age Verification - Accepted',
+                value: conversionValue,
+                currency: 'USD'
+            });
+            
+            // Track a custom event for the acceptance
+            fbq('trackCustom', 'AgeVerification', {
+                status: 'accepted',
+                value: conversionValue,
+                currency: 'USD'
+            });
+            
+            // Redirect after a short delay to allow the pixel to fire
+            setTimeout(function() {
+                window.location.href = e.target.href;
+            }, 300);
+        });
+
+        document.getElementById("noBtn").addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            // Track a custom event for the rejection
+            fbq('trackCustom', 'AgeVerification', {
+                status: 'rejected',
+                value: 0.00,
+                currency: 'USD'
+            });
+            
+            // Redirect after a short delay to allow the pixel to fire
+            setTimeout(function() {
+                window.location.href = e.target.href;
+            }, 300);
+        });
+    </script>
 </body>
-</html>
+              </html>
