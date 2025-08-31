@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adult Content Verification</title>
+    <title>Get Access to Exclusive Content</title>
     <meta name="robots" content="noindex, nofollow">
     <style>
         * {
@@ -14,36 +14,62 @@
         }
         
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
         }
         
-        .overlay {
-            background: rgba(0,0,0,0.8);
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .video-background video {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        
+        /* Dark overlay for better readability */
+        .video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 0;
         }
         
         .box {
-            background: rgba(20,20,30,0.95);
+            background: rgba(20, 20, 30, 0.95);
             padding: 40px;
             border-radius: 20px;
             max-width: 450px;
             text-align: center;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 2;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         
         .box::before {
@@ -53,7 +79,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,0,79,0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 0, 79, 0.3) 0%, transparent 70%);
             transform: rotate(45deg);
             z-index: -1;
         }
@@ -64,7 +90,7 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: #ff004f;
-            text-shadow: 0 0 10px rgba(255,0,79,0.5);
+            text-shadow: 0 0 15px rgba(255, 0, 79, 0.7);
         }
         
         p {
@@ -75,10 +101,17 @@
         }
         
         .age-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 1.5rem;
             color: #ff004f;
-            text-shadow: 0 0 15px rgba(255,0,79,0.7);
+            text-shadow: 0 0 20px rgba(255, 0, 79, 0.9);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         
         .buttons {
@@ -90,10 +123,10 @@
         
         .btn {
             display: inline-block;
-            background: #ff004f;
+            background: linear-gradient(45deg, #ff004f, #ff2e6f);
             color: #fff;
             font-weight: bold;
-            padding: 14px 30px;
+            padding: 16px 35px;
             border-radius: 50px;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -101,23 +134,38 @@
             cursor: pointer;
             font-size: 1.1rem;
             letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(255,0,79,0.4);
+            box-shadow: 0 5px 20px rgba(255, 0, 79, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            background: #ff2e6f;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255,0,79,0.6);
+            box-shadow: 0 8px 30px rgba(255, 0, 79, 0.7);
         }
         
         .btn.exit {
-            background: #444;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #444, #666);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
         
         .btn.exit:hover {
-            background: #666;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
         }
         
         .warning {
@@ -125,6 +173,35 @@
             margin-top: 30px;
             color: #aaa;
             font-style: italic;
+        }
+        
+        /* Loading state for video */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #333;
+            border-top: 3px solid #ff004f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         @media (max-width: 500px) {
@@ -148,22 +225,58 @@
             
             .btn {
                 width: 100%;
+                padding: 14px 25px;
             }
+            
+            .age-icon {
+                font-size: 3rem;
+            }
+        }
+        
+        /* Fallback for mobile autoplay restrictions */
+        .video-fallback {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            z-index: -1;
         }
     </style>
 </head>
 <body>
-    <div class="overlay">
-        <div class="box">
-            <div class="age-icon">🔞</div>
-            <h1>Adult Content Verification</h1>
-            <p>You must be 18 years or older to access this content. By entering, you confirm you are of legal age and agree to our Terms of Service.</p>
-            <div class="buttons">
-                <a href="#" onclick="handleVerificationClick(event, 'yes')" class="btn" id="yesBtn">I am 18+</a>
-                <a href="#" onclick="handleVerificationClick(event, 'no')" class="btn exit" id="noBtn">Exit</a>
-            </div>
-            <p class="warning">Warning: This content is intended for adults only and contains age-restricted material.</p>
+    <!-- Video Background -->
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="Background-video.mp4" type="video/mp4">
+            <!-- Fallback image if video doesn't load -->
+            <img src="data:image/svg+xml,%3Csvg xmlns='FB_IMG_1754585249363.jpg' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a1a2e'/%3E%3Cstop offset='100%25' stop-color='%2316213e'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='800' fill='url(%23grad)'/%3E%3C/svg%3E" alt="Background" style="width: 100%; height: 100%; object-fit: cover;">
+        </video>
+    </div>
+    
+    <!-- Fallback for mobile -->
+    <div class="video-fallback" id="videoFallback"></div>
+    
+    <!-- Dark overlay -->
+    <div class="video-overlay"></div>
+    
+    <!-- Loading screen -->
+    <div class="loading" id="loading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Content Box -->
+    <div class="box">
+        <div class="age-icon">🔞</div>
+        <h1>Get Access to Exclusive Content</h1>
+        <p>Verify you're 18+ by clicking "GET ACCESS NOW" to get immediate access to premium adult content</p>
+        <div class="buttons">
+            <a href="#" onclick="handleVerificationClick(event, 'yes')" class="btn" id="yesBtn">GET ACCESS NOW</a>
+            <a href="#" onclick="handleVerificationClick(event, 'no')" class="btn exit" id="noBtn">Exit</a>
         </div>
+        <p class="warning">Warning: 18+ age verification required for access</p>
     </div>
 
     <!-- Meta Pixel Code -->
@@ -177,67 +290,77 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         
-        // Initialize the Pixel with your ID
         fbq('init', '1091970342909970');
-        
-        // Track PageView for the initial load
         fbq('track', 'PageView');
-        
-        // Track ViewContent with proper parameters
         fbq('track', 'ViewContent', {
-            content_name: 'Age Verification Gate',
+            content_name: 'Get Access - Age Verification',
             content_category: 'Adult Content',
             value: 0.00,
             currency: 'USD'
         });
 
-        // Function to handle button clicks and preserve Facebook click ID
         function handleVerificationClick(e, choice) {
             e.preventDefault();
             
-            // Get Facebook click ID before we lose it
             const fbc = getCookie('_fbc');
             const fbclid = new URLSearchParams(window.location.search).get('fbclid');
             
-            // Build URL with preserved click ID parameters
             let workerUrl = `https://juicypleasure-worker.mudilawal7.workers.dev?choice=${choice}`;
             
-            // Add click ID parameters if available
             if (fbc) workerUrl += `&fbc=${encodeURIComponent(fbc)}`;
             if (fbclid) workerUrl += `&fbclid=${encodeURIComponent(fbclid)}`;
             
-            // Track the conversion event
             const conversionValue = 0.003;
             fbq('track', 'Lead', {
-                content_name: 'Age Verification - ' + (choice === 'yes' ? 'Accepted' : 'Rejected'),
+                content_name: 'Get Access - ' + (choice === 'yes' ? 'Accepted' : 'Rejected'),
                 value: conversionValue,
                 currency: 'USD'
             });
             
-            // Track custom event
             fbq('trackCustom', 'AgeVerification', {
                 status: choice === 'yes' ? 'accepted' : 'rejected',
                 value: conversionValue,
                 currency: 'USD'
             });
             
-            // Your existing redirect script will handle the browser opening
-            // It will use the workerUrl that contains preserved click IDs
             window.location.href = workerUrl;
         }
 
-        // Helper function to get cookies
         function getCookie(name) {
             const value = `; ${document.cookie}`;
             const parts = value.split(`; ${name}=`);
             if (parts.length === 2) return parts.pop().split(';').shift();
             return null;
         }
+
+        // Video loading handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('bgVideo');
+            const loading = document.getElementById('loading');
+            const fallback = document.getElementById('videoFallback');
+            
+            // Hide loading after video loads or after timeout
+            setTimeout(() => {
+                loading.style.opacity = '0';
+                setTimeout(() => loading.style.display = 'none', 500);
+            }, 2000);
+            
+            // Handle video errors
+            video.addEventListener('error', function() {
+                fallback.style.display = 'block';
+            });
+            
+            // Check if video is playing (mobile autoplay restrictions)
+            setTimeout(() => {
+                if (video.paused && video.readyState >= 3) {
+                    fallback.style.display = 'block';
+                }
+            }, 1000);
+        });
     </script>
     <noscript>
         <img height="1" width="1" style="display:none" 
             src="https://www.facebook.com/tr?id=1091970342909970&ev=PageView&noscript=1"/>
     </noscript>
-    <!-- End Meta Pixel Code -->
 </body>
-</html>
+    </html>
